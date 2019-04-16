@@ -21,7 +21,7 @@ namespace InterfaceTask1.Model
         }
         public override string ToString()
         {
-            return $"{FirstName} {LastName}, {Birthdate.ToShortDateString()}";
+            return $"{FirstName} {LastName}, {Birthdate.ToShortDateString()} Age: {GetAge()}";
         }
     }
 }

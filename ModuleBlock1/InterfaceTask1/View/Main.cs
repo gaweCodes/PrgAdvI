@@ -22,7 +22,7 @@ namespace InterfaceTask1.View
 
         private void BtnGetOldestPerson_Click(object sender, System.EventArgs e)
         {
-            LblOldestPerson.Text = $"{_manager.GetOldestPersonAsString()} {_manager.GetOldestPerson().GetAge()} years old!";
+            LblOldestPerson.Text = $"{_manager.GetOldestPersonAsString()} years old!";
         }
     }
 }
