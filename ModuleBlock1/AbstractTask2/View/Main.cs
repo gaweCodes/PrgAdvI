@@ -1,8 +1,9 @@
-﻿using System.Windows.Forms;
-using AbstractTask1.Controller;
-using AbstractTask1.Model;
+﻿using System;
+using System.Windows.Forms;
+using AbstractTask2.Controller;
+using AbstractTask2.Model;
 
-namespace AbstractTask1.View
+namespace AbstractTask2.View
 {
     public partial class Main : Form
     {
@@ -12,7 +13,7 @@ namespace AbstractTask1.View
             InitializeComponent();
         }
 
-        private void BtnShowCompactDiscs_Click(object sender, System.EventArgs e)
+        private void BtnShowCompactDiscs_Click(object sender, EventArgs e)
         {
             _mediumManager.AddMedium(new Cd("TMMLP2",180,"Eminem",16));
             _mediumManager.AddMedium(new Cd("TMMLP2", 180, "Eminem", 16){Comment = "asdf", Mine = true});
@@ -23,7 +24,7 @@ namespace AbstractTask1.View
             LsbCompactDiscs.Items.AddRange(_mediumManager.GetAllCompactDiscs());
         }
 
-        private void BtnShowDigitalVideoDiscs_Click(object sender, System.EventArgs e)
+        private void BtnShowDigitalVideoDiscs_Click(object sender, EventArgs e)
         {
             _mediumManager.AddMedium(new Dvd("TMMLP2", 180, "Ueli"));
             _mediumManager.AddMedium(new Dvd("TMMLP2", 180, "Fritz"));
@@ -32,6 +33,11 @@ namespace AbstractTask1.View
             _mediumManager.AddMedium(new Dvd("TMMLP2", 180, "Gabriel"));
             LsbDigitalVideoDiscs.Items.Clear();
             LsbDigitalVideoDiscs.Items.AddRange(_mediumManager.GetAllDigitalVideoDiscs());
+        }
+
+        private void BtnShowMedia_Click(object sender, EventArgs e)
+        {
+            new AllMedia(_mediumManager).Show();
         }
     }
 }

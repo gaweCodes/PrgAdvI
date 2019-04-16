@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AbstractTask1.Model
+namespace AbstractTask2.Model
 {
     public class Dvd : Medium
     {
@@ -19,7 +19,7 @@ namespace AbstractTask1.Model
         {
             Director = director;
         }
-        public override string Print()
+        public new string Print()
         {
             var data = base.Print();
             const string delimiter = " | ";

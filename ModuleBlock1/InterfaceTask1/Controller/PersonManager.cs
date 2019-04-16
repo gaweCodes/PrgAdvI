@@ -15,7 +15,7 @@ namespace InterfaceTask1.Controller
         }
         public void AddPerson(IPerson person)
         {
-            if (person == null) throw new ArgumentNullException("The argument is null");
+            if (person == null) throw new ArgumentNullException(nameof(person));
             _persons.Add(person);
         }
         private Person GetOldestPerson()

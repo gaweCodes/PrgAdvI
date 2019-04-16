@@ -8,13 +8,13 @@ namespace InterfaceTask2.View
 {
     public partial class Main : Form
     {
-        private PersonManager _manager = new PersonManager();
+        private readonly PersonManager _manager = new PersonManager();
         public Main()
         {
             InitializeComponent();
         }
 
-        private void BtnSort_Click(object sender, System.EventArgs e)
+        private void BtnSort_Click(object sender, EventArgs e)
         {
             LsbPersons.Items.Clear();
             LsbPersons.Items.AddRange(_manager.GetSortedPersonsAsListBoxItemObjects());

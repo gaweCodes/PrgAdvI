@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AbstractTask1.Model
+namespace AbstractTask3.Model
 {
     public class Dvd : Medium
     {
@@ -21,8 +21,10 @@ namespace AbstractTask1.Model
         }
         public override string Print()
         {
-            var data = base.Print();
             const string delimiter = " | ";
+            var data = $"{GetType().Name}: {Title} ({Duration} Min){delimiter}";
+            data += "Mine: " + (Mine ? "Mine" : "") + delimiter;
+            data += $"Comment: {Comment}{delimiter}";
             data += $"Director: {_director}{delimiter}";
             return data;
         }

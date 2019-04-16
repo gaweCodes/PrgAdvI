@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AbstractTask1.Model
+namespace AbstractTask2.Model
 {
     public class Cd : Medium
     {
@@ -33,7 +33,7 @@ namespace AbstractTask1.Model
                     throw new ArgumentException("argument may not be empty!");
             }
         }
-        public override string Print()
+        public new string Print()
         {
             var data = base.Print();
             const string delimiter = " | ";

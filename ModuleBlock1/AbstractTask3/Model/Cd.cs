@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AbstractTask1.Model
+namespace AbstractTask3.Model
 {
     public class Cd : Medium
     {
@@ -35,10 +35,12 @@ namespace AbstractTask1.Model
         }
         public override string Print()
         {
-            var data = base.Print();
             const string delimiter = " | ";
-            data += $"Interpret {_interpret}{delimiter}";
-            data += $"NumberOfTracks {_numberOfTracks}{delimiter}";
+            var data = $"{GetType().Name}: {Title} ({Duration} Min){delimiter}";
+            data += "Mine: " + (Mine ? "Mine" : "") + delimiter;
+            data += $"Comment: {Comment}{delimiter}";
+            data += $"Interpret {Interpret}{delimiter}";
+            data += $"NumberOfTracks {NumberOfTracks}{delimiter}";
             return data;
         }
     }

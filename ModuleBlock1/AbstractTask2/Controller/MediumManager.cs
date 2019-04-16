@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AbstractTask1.Model;
+using AbstractTask2.Model;
 
-namespace AbstractTask1.Controller
+namespace AbstractTask2.Controller
 {
     public class MediumManager
     {
@@ -15,12 +15,19 @@ namespace AbstractTask1.Controller
         {
             _mediumList.Add(medium);
         }
+        public object[] GetAllMedia()
+        {
+            var data = new object[_mediumList.Count];
+            for (var index = 0; index < _mediumList.Count; index++)
+                data[index] = _mediumList[index].Print();
+            return data;
+        }
         public object[] GetAllCompactDiscs()
         {
             var allCds = _mediumList.Where(c => c is Cd).ToList();
             var data = new object[allCds.Count];
             for (var index = 0; index < allCds.Count; index++)
-                data[index] = allCds[index].Print();
+                data[index] = ((Cd)allCds[index]).Print();
             return data;
         }
         public object[] GetAllDigitalVideoDiscs()
@@ -28,7 +35,7 @@ namespace AbstractTask1.Controller
             var allDvd = _mediumList.Where(d => d is Dvd).ToList();
             var data = new object[allDvd.Count];
             for (var index = 0; index < allDvd.Count; index++)
-                    data[index] = allDvd[index].Print();
+                    data[index] = ((Dvd)allDvd[index]).Print();
             return data;
         }
     }
