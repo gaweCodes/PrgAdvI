@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace InterfaceTask2.Model.Interfaces
+namespace InterfaceTask3.Model.Interfaces
 {
     public interface IPerson //Alternative way to sort : IComparable
     {

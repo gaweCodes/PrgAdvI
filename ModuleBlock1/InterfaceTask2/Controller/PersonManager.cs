@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using InterfaceTask2.Model;
+﻿using System.Collections.Generic;
 using InterfaceTask2.Model.Interfaces;
 
-namespace InterfaceTask2.Control
+namespace InterfaceTask2.Controller
 {
     public class PersonManager
     {
@@ -26,10 +24,12 @@ namespace InterfaceTask2.Control
 
         public object[] GetSortedPersonsAsListBoxItemObjects()
         {
-            _persons.Sort();
+            //IComparable alternative _persons.Sort();
+            //IComparer alternative
+            _persons.Sort(new PersonComparer());
             var count = _persons.Count;
             var personsAsString = new object[count];
-            for (var i = count-1; i >= 0; i--)
+            for (var i = 0; i < count; i++)
                 personsAsString[i] = _persons[i].ToString();
             return personsAsString;
         }

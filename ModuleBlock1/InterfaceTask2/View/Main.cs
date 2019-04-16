@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using InterfaceTask2.Control;
+using InterfaceTask2.Controller;
 using InterfaceTask2.Model;
 using InterfaceTask2.Model.Interfaces;
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using InterfaceTask2.View;
+using InterfaceTask3.View;
 
-namespace InterfaceTask2
+namespace InterfaceTask3
 {
     internal static class Program
     {

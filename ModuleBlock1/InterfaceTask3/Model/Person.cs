@@ -1,7 +1,7 @@
 ﻿using System;
-using InterfaceTask2.Model.Interfaces;
+using InterfaceTask3.Model.Interfaces;
 
-namespace InterfaceTask2.Model
+namespace InterfaceTask3.Model
 {
     public class Person : IPerson
     {
