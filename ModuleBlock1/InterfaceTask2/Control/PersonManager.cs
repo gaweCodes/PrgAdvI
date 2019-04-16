@@ -26,7 +26,7 @@ namespace InterfaceTask2.Control
 
         public object[] GetSortedPersonsAsListBoxItemObjects()
         {
-            _persons.Sort(new PersonComparer());
+            _persons.Sort();
             var count = _persons.Count;
             var personsAsString = new object[count];
             for (var i = count-1; i >= 0; i--)

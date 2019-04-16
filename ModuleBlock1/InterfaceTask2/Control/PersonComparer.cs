@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using InterfaceTask2.Model.Interfaces;
 
-namespace InterfaceTask2.Model
+namespace InterfaceTask2.Control
 {
     internal class PersonComparer : IComparer<IPerson>
     {

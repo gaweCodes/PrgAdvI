@@ -22,6 +22,24 @@ namespace InterfaceTask2.Model
         {
             return $"{FirstName} {LastName}, Age: {GetAge()}";
         }
+
+        public int CompareTo(object obj)
+        {
+            var person = (Person)obj;
+            if (LastName.ToUpper().CompareTo(person.LastName.ToUpper()) == 0)
+            {
+                if (FirstName.ToUpper().CompareTo(person.FirstName.ToUpper()) == 0)
+                {
+                    if (person.GetAge() < GetAge())
+                        return 1;
+                    if (person.GetAge() > GetAge())
+                        return -1;
+                    return 0;
+                }
+                return FirstName.ToUpper().CompareTo(person.FirstName.ToUpper());
+            }
+            return LastName.ToUpper().CompareTo(person.LastName.ToUpper());
+        }
         /*public int CompareTo(object obj)
         {
             var person = (Person) obj;

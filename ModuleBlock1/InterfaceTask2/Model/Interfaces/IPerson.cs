@@ -2,7 +2,7 @@
 
 namespace InterfaceTask2.Model.Interfaces
 {
-    public interface IPerson /* : One way IComparable*/
+    public interface IPerson : IComparable
     {
         string FirstName { get; }
         string LastName { get; }

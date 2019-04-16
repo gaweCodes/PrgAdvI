@@ -49,7 +49,7 @@
     <Compile Include="Control\PersonManager.cs" />
     <Compile Include="Model\Interfaces\IPerson.cs" />
     <Compile Include="Model\Person.cs" />
-    <Compile Include="Model\PersonComparer.cs" />
+    <Compile Include="Control\PersonComparer.cs" />
     <Compile Include="View\Main.cs">
       <SubType>Form</SubType>
     </Compile>

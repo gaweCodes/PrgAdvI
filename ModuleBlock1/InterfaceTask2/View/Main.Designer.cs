@@ -35,16 +35,19 @@
             // LsbPersons
             // 
             this.LsbPersons.FormattingEnabled = true;
-            this.LsbPersons.Location = new System.Drawing.Point(13, 13);
+            this.LsbPersons.ItemHeight = 16;
+            this.LsbPersons.Location = new System.Drawing.Point(17, 16);
+            this.LsbPersons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.LsbPersons.Name = "LsbPersons";
-            this.LsbPersons.Size = new System.Drawing.Size(455, 420);
+            this.LsbPersons.Size = new System.Drawing.Size(605, 516);
             this.LsbPersons.TabIndex = 0;
             // 
             // BtnSort
             // 
-            this.BtnSort.Location = new System.Drawing.Point(13, 440);
+            this.BtnSort.Location = new System.Drawing.Point(17, 542);
+            this.BtnSort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnSort.Name = "BtnSort";
-            this.BtnSort.Size = new System.Drawing.Size(455, 23);
+            this.BtnSort.Size = new System.Drawing.Size(607, 28);
             this.BtnSort.TabIndex = 1;
             this.BtnSort.Text = "Sort";
             this.BtnSort.UseVisualStyleBackColor = true;
@@ -52,11 +55,12 @@
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 473);
+            this.ClientSize = new System.Drawing.Size(641, 582);
             this.Controls.Add(this.BtnSort);
             this.Controls.Add(this.LsbPersons);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Main";
             this.Text = "Sort Persons";
             this.Load += new System.EventHandler(this.Main_Load);
