@@ -1,8 +1,8 @@
 ﻿namespace Eratosthenes.Enums
 {
-    public enum PrimeType
+    public enum PrimType
     {
-        Prime,
-        NotPrime
+        Prim,
+        NotPrim
     }
 }

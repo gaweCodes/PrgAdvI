@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B74704B4-EBC1-4D07-812B-A5DC1727D2C6}</ProjectGuid>
+    <ProjectGuid>{24F6F3F6-1AFD-4921-A05A-D3C4AA55165E}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Eratosthenes</RootNamespace>
-    <AssemblyName>Eratosthenes</AssemblyName>
+    <RootNamespace>Integrator</RootNamespace>
+    <AssemblyName>Integrator</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,13 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\PrimeType.cs" />
+    <Compile Include="Integrator.cs" />
+    <Compile Include="Interfaces\IFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
