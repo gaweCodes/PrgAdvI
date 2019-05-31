@@ -1,65 +1,62 @@
 ﻿using System;
 using System.Collections;
 
-namespace _1._3_ArrayListOperationen {
-    // TODO: Delegate "Action"
-    // public delegate ...
-
-    // TODO: Delegate "Predicate"
-    // public delegate ...
-
-    class Program {
-        static void Main() {
-            ArrayList list = GetNameList();
-
-
+namespace _1._3_ArrayListOperationen
+{
+    public delegate void Action(string s);
+    public delegate bool Predicate(string s);
+    internal class Program
+    {
+        private static void Main()
+        {
+            var list = GetNameList();
+            
             Console.WriteLine("--------------------------------------------------");
             Console.WriteLine("Liste aller Namen:");
-
-            // TODO: list ausgeben (Methode ForAll)
-            // ForAll(list, ...);
-
+            ForAll(list, Console.WriteLine);
 
             Console.WriteLine("--------------------------------------------------");
             Console.WriteLine("Liste aller Namen mit 'S':");
 
-            // TODO: list auf Namen beginnend mit "S" filtern mit anonymer Methode (Methode Find)
-            // ArrayList listStartsWithS = ...
-
-            // TODO: listStartsWithS ausgeben (Methode ForAll)
-            // ForAll(list, ...);
-
+            var listStartsWithS = Find(list, s => s.Trim().StartsWith("S"));
+            ForAll(listStartsWithS, Console.WriteLine);
 
             Console.WriteLine("--------------------------------------------------");
             Console.WriteLine("Liste aller Namen mit Länge >= 15:");
 
-            // TODO: list auf Namen mit Länge >= 15 filtern mit anonymer Methode (Methode Find)
-            // ArrayList listLength15Plus = ...
-
-            // TODO: listLength15Plus ausgeben (Methode ForAll)
-            // ForAll(list, ...);
-
+            var listLength15Plus = Find(list, delegate(string s) { return s.Length >= 16; });
+            ForAll(listLength15Plus, delegate(string s) { Console.WriteLine(s); });
 
             Console.WriteLine("--------------------------------------------------");
             Console.WriteLine("Konkatenierter String:");
 
-            string concatenated = String.Empty;
-
-            // TODO: list in einen string konkatenieren (Methode ForAll)
-            // ForAll(list, ...);
-
-            // TODO: string "concatenated" auf Konsole ausgeben
-
-            Console.ReadKey();
+            var concatenated = string.Empty;
+            ForAll(list, delegate(string s) { concatenated += s + ";"; });
+            Console.WriteLine(concatenated);
+            Console.ReadLine();
         }
 
-        // TODO: Methode ForAll(...) implementieren
-        // private static void ForAll(ArrayList list, Action action)
+        private static void ForAll(ArrayList list, Action action)
+        {
+            if (action == null) return;
+            foreach (var line in list) action.Invoke((string)line);
+        }
+        private static ArrayList Find(ArrayList list, Predicate predicate)
+        {
+            var filtered = new ArrayList();
+            if (predicate == null)
+                return filtered;
 
-        // TODO: Methode Find(...) implementieren
-        // private static ArrayList Find(ArrayList list, Predicate predicate)
+            foreach (var line in list)
+            {
+                if (predicate((string) line))
+                    filtered.Add(line);
+            }
 
-        private static ArrayList GetNameList() {
+            return filtered;
+        }
+        private static ArrayList GetNameList()
+        {
             return new ArrayList {
                 "Shaun Byler",
                 "Regenia Politte",

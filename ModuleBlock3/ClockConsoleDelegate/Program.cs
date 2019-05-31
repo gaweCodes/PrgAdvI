@@ -8,8 +8,8 @@ namespace ClockConsoleDelegate
         private static void Main()
         {
             var clock = new Clock();
-            Clock.Notifier n = SayTack;
-            clock.StartTimer(n);
+            Clock.Notifier sayTack = SayTack;
+            clock.StartTimer(sayTack);
         }
         private static void SayTack()
         {

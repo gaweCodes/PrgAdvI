@@ -1,44 +1,41 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 
-namespace _1._4_CompletionCallback {
-    interface IFileReaderClient // Callback Interface
+namespace _1._4_CompletionCallback
+{
+    public delegate void ReadCompleted(string filename, byte[] data);
+    public delegate void ReadFailed(string filename, IOException ex);
+    internal class FileReader
     {
-        void ReadCompleted(String filename, byte[] data);
-        void ReadFailed(String filename, IOException ex);
-    }
-
-    class FileReader {
-        public static void ReadAsync(String filename, IFileReaderClient client) {
-            // FileReaderAsync-Objekt mit korrekten Parametern erzeugen
-            FileReaderAsync my = new FileReaderAsync(filename, client);
-
-            // Worker-Thread starten (führt DoRead asynchron aus)
+        public static void ReadAsync(string filename, ReadCompleted client, ReadFailed fallback)
+        {
+            var my = new FileReaderAsync(filename, client, fallback);
             new Thread(my.DoRead).Start();
         }
-
-        /// <summary>
-        /// Internal Helper Class
-        /// </summary>
-        private class FileReaderAsync {
-            private string fileName;
-            private IFileReaderClient fileReaderClient;
-
-            public FileReaderAsync(String fn, IFileReaderClient c) {
-                fileName = fn;
-                fileReaderClient = c;
+        private class FileReaderAsync
+        {
+            private readonly string _fileName;
+            private readonly ReadCompleted _completed;
+            private readonly ReadFailed _failed;
+            public FileReaderAsync(string filename, ReadCompleted client, ReadFailed fallback)
+            {
+                _fileName = filename;
+                _completed = client;
+                _failed = fallback;
             }
-
-            public void DoRead() {
-                byte[] buffer = new byte[1024]; // Nur als Beispiel
-                try {
-                    FileStream s = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-                    BinaryReader r = new BinaryReader(s);
+            public void DoRead()
+            {
+                var buffer = new byte[1024];
+                try
+                {
+                    var fs = new FileStream(_fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    var r = new BinaryReader(fs);
                     buffer = r.ReadBytes(buffer.Length);
-                    fileReaderClient?.ReadCompleted(fileName, buffer);
-                } catch (IOException ex) {
-                    fileReaderClient?.ReadFailed(fileName, ex);
+                    _completed?.Invoke(_fileName, buffer);
+                }
+                catch (IOException ex)
+                {
+                    _failed?.Invoke(_fileName, ex);
                 }
             }
         }
