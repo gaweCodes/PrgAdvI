@@ -1,38 +1,30 @@
 ﻿using System;
+using _1._2_CounterLib;
 
-namespace _1._2_CounterClient {
-    class Program {
-        // TODO:
-        // Event-Handler Methode "OnCountValueChanged"
-        // static void ...
+namespace _1._2_CounterClient
+{
+    internal class Program
+    {
+        private static void OnCountValueChanged(Counter c, CounterEventArgs arg) =>
+            Console.WriteLine($"Counter changed: Value = {arg.Value}");
 
         [STAThread]
-        static void Main(string[] args) {
-            // TODO:
-            // Counter auf den Initialwert "10" setzen
+        private static void Main()
+        {
+            var myCounter = new Counter(10);
 
-            // TODO:
-            // CounterObserver-Instanzen "myObserver1" / "myObserver2" mit den Namen  "obs1" / "obs2"
+            var myObserver1 = new CounterObserver("obs1");
+            var myObserver2 = new CounterObserver("obs2");
 
-            // TODO:
-            // Registrieren der Event-Handler
+            myCounter.CountValueChanged += OnCountValueChanged;
+            myCounter.CountValueChanged += myObserver1.OnCountValueChanged;
+            myCounter.CountValueChanged += myObserver2.OnCountValueChanged;
 
-            // TODO:
-            // Inkrementieren des Counters
+            myCounter.Increment();
+            myCounter.CountValueChanged -= myObserver1.OnCountValueChanged;
 
-            // TODO:
-            // Deregistrieren des Events von myObserver1
-
-            // TODO:
-            // Counterwert auf "100" zurücksetzen.
-
-            Console.ReadKey();
+            myCounter.Reset(100);
+            Console.ReadLine();
         }
-
-        // TODO:
-        // Implementieren Sie die Klasse "CounterObserver"
-        // class CounterObserver { ...
-
-
     }
 }

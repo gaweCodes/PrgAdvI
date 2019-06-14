@@ -28,14 +28,10 @@ namespace _1._1_Sort
             if (fraction1 < fraction2) return -1;
             return fraction1 > fraction2 ? 1 : 0;
         }
-        private static int CompareString(object x, object y)
-        {
-            return ((string) x).CompareTo(y);
-        }
+        private static int CompareString(object x, object y) => ((string) x).CompareTo(y);
         private static void Sort(object[] a, Comparer compare)
         {
             Debug.Assert(compare != null && compare.GetInvocationList().Length == 1, "Genau eine Vergleichsmethode.");
-
             for (var i = 0; i < a.Length - 1; i++)
             {
                 var min = i;
