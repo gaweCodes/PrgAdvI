@@ -1,0 +1,43 @@
+AssemblyInfo.cs: 
+Enthält generelle Informationen über ein Assembly. Dazu gibt es ein ganzes Set von Attributen welche gesetzt bzw. bearbeitet werden können. 
+AssemblyTitle("Testat_Wpf_Kundenverwaltung")
+AssemblyDescription("")
+AssemblyConfiguration("")
+AssemblyCompany("")
+AssemblyProduct("Testat_Wpf_Kundenverwaltung")
+AssemblyCopyright("Copyright ©  2019")
+AssemblyTrademark("")
+AssemblyCulture("")
+ComVisible(false)
+NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)
+ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)
+AssemblyVersion("1.0.0.0")
+AssemblyFileVersion("1.0.0.0")
+
+Resources.resx:
+Enthält die Ressourcen, die ins Assembly kompiliert werden. Ressourcen können Strings, Bilder, Video usw. sein. Ich nutze die Resoucen meistens mit Strings für Multi-Language-Systeme.
+
+Resources.Designer.cs:
+Automatisch generierte Klasse für Resources.resx. Diese ermöglicht aus dem Quellcode den Zugriff auf die Ressourcen.
+
+Settings.settings:
+Beinhaltet die Einstellungen. 
+
+Settings.Designer.cs:
+Automatisch generierte Klasse für Settings.settings. Diese ermöglicht aus dem Quellcode den Zugriff auf die Einstellungen.
+
+App.config:
+Enthält die Konfiguration für das Programm. Dies sind unter anderem die Einstellungen aus Settings.settings weiter z.B. ConnectionStrings, Informationen welche Version von referenzierten Assemblies verwendet werden sollen usw. Ich verwende es auch als Seed-Config, Datensätze welche beim ersten Start Applikation in die DB geschrieben werden sollen.  Beispiel: Admin-User.
+
+App.xaml:
+Dies ist der deklarative Einstiegspunkt einer WPF-Applikation. Die Eigenschaft StartupUri definiert das Window, welches zu Beginn angezeigt werden soll. 
+In App.xaml werden oft auch globale Ressourcen registriert und für die gesamte Applikation zur Verfügung gestellt.
+
+App.xaml.cs:
+CodeBehind-Klasse für App.xaml. Die Klasse erbt von Application, welche eine zentrale Klasse für WPF-Applikationen darstellt. Diese Klasse ermöglicht auch die Registrierung von globalen Eventhandlern wir Startup, Exit, UnhandledException usw.
+
+MainWindow.xaml:
+XAML-Datei für das MainWindow. Dies ist das Standardfenster welches vom Projektassistenten angelegt wird. Hier wird UI mit XAML definiert. 
+
+MainWindow.xaml.cs:
+CodeBehind-Klasse für MainWindow. Es greift auf die Controls des XAML zu und führt den C# Code hinter den Controls etc. aus.
