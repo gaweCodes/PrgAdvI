@@ -1,0 +1,4 @@
+Siehe Code bzw. auch Kommentare im der Solution. Grundsätzlich soll noch folgendes Speziell erwähnt werden:
+- Durch das Binding entfällt die Logik für das Updaten der einzelnen Customers. 
+- Die Listbox funktioniert nur dank der Templates richtig. Ohne die Templates wird einfach der ToString verwendet. 
+- Aufgaben 11 ist Teilweise umgesetzt. Musste ja nicht gemacht werden.

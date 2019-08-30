@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 using Datasource;
 
 namespace Testat_Wpf_Kundenverwaltung
@@ -7,26 +7,32 @@ namespace Testat_Wpf_Kundenverwaltung
     public partial class MainWindow
     {
         private Data Source { get; set; }
-        private int CurrentIndex { get; set; }
         public MainWindow()
         {
             InitializeComponent();
         }
-
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            const int firstIndex = 0;
+            Source = Data.Load();
+            LstCustomers.ItemsSource = Source.Customers.CustomerList;
+            LstCustomers.SelectedItem = Source.Customers.CustomerList[firstIndex];
+        }
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            SaveCurrentCustomer();
             Source.Save();
             Close();
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Source = Data.Load();
-            CurrentIndex = 0;
-            LoadCurrentCustomer();
+            var senderListBox = (ListBox)sender;
+            DataContext = senderListBox.SelectedItem;
         }
-        private void LoadCurrentCustomer()
+        /**
+         * Wird nicht mehr benötigt. Weil wir jetzt ein fancy binding haben.
+         * Zusätzlich wird Vor und Zurück Button mehr gebraucht. Changed Event der Liste.
+         */
+        /*private void LoadCurrentCustomer()
         {
             if (CurrentIndex >= Source.Customers.CustomerList.Count)
                 CurrentIndex = Source.Customers.CustomerList.Count - 1;
@@ -53,20 +59,6 @@ namespace Testat_Wpf_Kundenverwaltung
             customer.Phone = TxtPhone.Text;
             customer.Fax = TxtFax.Text;
             customer.Birthday = DatBirthday.SelectedDate ?? DateTime.MinValue;
-        }
-
-        private void Next_Click(object sender, RoutedEventArgs e)
-        {
-            SaveCurrentCustomer();
-            CurrentIndex++;
-            LoadCurrentCustomer();
-        }
-
-        private void Prev_Click(object sender, RoutedEventArgs e)
-        {
-            SaveCurrentCustomer();
-            CurrentIndex--;
-            LoadCurrentCustomer();
-        }
+        }*/
     }
 }

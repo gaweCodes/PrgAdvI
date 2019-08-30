@@ -5,10 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Customer" Height="300" Width="500" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" >
+    <Window.Resources>
+        <Style TargetType="FrameworkElement">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type FrameworkElement}}" />
+        <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource {x:Type FrameworkElement}}" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25" />
-            <ColumnDefinition Width="25" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
@@ -24,22 +34,39 @@
             <RowDefinition Height="25"  />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">_CustomerID:</Label>
-        <TextBox x:Name="TxtCustomerId" Grid.Column="3" Grid.Row="0" />
-        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" >C_ompanyname:</Label>
-        <TextBox x:Name="TxtCompanyName" Grid.Column="3" Grid.Row="1" />
-        <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" >Co_ntactname:</Label>
-        <TextBox x:Name="TxtContactName" Grid.Column="3" Grid.Row="2" />
-        <Label Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3">Con_tacttitle:</Label>
-        <TextBox x:Name="TxtContactTitle" Grid.Column="3" Grid.Row="3" />
-        <Label Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3">_Phone:</Label>
-        <TextBox x:Name="TxtPhone" Grid.Column="3" Grid.Row="4" />
-        <Label Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3">_Fax:</Label>
-        <TextBox x:Name="TxtFax" Grid.Column="3" Grid.Row="5" />
-        <Label Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3">_Birthday:</Label>
-        <DatePicker x:Name="DatBirthday" Grid.Column="3" Grid.Row="6" />
-        <Button Grid.Row="8" Grid.Column="0" Click="Prev_Click">&lt;</Button>
-        <Button Grid.Row="8" Grid.Column="1" Click="Next_Click">&gt;</Button>
-        <Button Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="2" Click="Close_Click">Close</Button>
+        <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=TxtCustomerId}">_CustomerID:</Label>
+        <TextBox x:Name="TxtCustomerId" Grid.Row="0" Grid.Column="1" Text="{Binding CustomerID, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        <Label Grid.Column="0" Grid.Row="1" Target="{Binding ElementName=TxtCompanyName}">C_ompanyname:</Label>
+        <TextBox x:Name="TxtCompanyName" Grid.Row="1" Grid.Column="1" Text="{Binding CompanyName, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        <Label Grid.Column="0" Grid.Row="2" Target="{Binding ElementName=TxtContactName}">Co_ntactname:</Label>
+        <TextBox x:Name="TxtContactName" Grid.Row="2" Grid.Column="1" Text="{Binding ContactName, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        <Label Grid.Column="0" Grid.Row="3" Target="{Binding ElementName=TxtContactTitle}">Con_tacttitle:</Label>
+        <TextBox x:Name="TxtContactTitle" Grid.Row="3" Grid.Column="1" Text="{Binding ContactTitle, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        <Label Grid.Column="0" Grid.Row="4" Target="{Binding ElementName=TxtPhone}">_Phone:</Label>
+        <TextBox x:Name="TxtPhone" Grid.Row="4" Grid.Column="1" Text="{Binding Phone, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        <Label Grid.Column="0" Grid.Row="5" Target="{Binding ElementName=TxtFax}" >_Fax:</Label>
+        <TextBox x:Name="TxtFax" Grid.Row="5" Grid.Column="1" Text="{Binding Fax, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        <Label Grid.Column="0" Grid.Row="6" Target="{Binding ElementName=DatBirthday}">_Birthday:</Label>
+        <DatePicker x:Name="DatBirthday" Grid.Row="6" Grid.Column="1" SelectedDate="{Binding Birthday, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        <ListBox x:Name="LstCustomers" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" SelectionChanged="listbox_SelectionChanged">
+            <!-- Das Template wird gebraucht, um die durch das Binding erhaltenen Daten korrekt anzuzueigen. -->
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding CustomerID}" />
+                        <TextBlock Text="{Binding CompanyName}" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=ContactName}" />
+                            <TextBlock Text=" (" />
+                            <TextBlock Text="{Binding ContactTitle}" />
+                            <TextBlock Text=")" />
+                        </StackPanel>
+                        <TextBlock Text="{Binding Phone}" />
+                        <TextBlock Text="{Binding Birthday, StringFormat=d, ConverterCulture=de-CH}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Click="Close_Click">Close</Button>
     </Grid>
 </Window>
