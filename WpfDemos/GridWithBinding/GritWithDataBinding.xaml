@@ -1,0 +1,76 @@
+﻿<Window x:Class="GridWithBinding.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GridWithBinding"
+        mc:Ignorable="d"
+        Title="Grid Layout mit Data Binding" Height="450" Width="800"
+        DataContext="{x:Static local:Person.Instance}">
+    <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="250" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="25" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Person Id</Label>
+            <TextBox Grid.Column="1" Grid.Row="0" IsReadOnly="True" Text="{Binding Path=PersonId, UpdateSourceTrigger=PropertyChanged }" />
+            <Label Grid.Column="0" Grid.Row="1">Firstname</Label>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Column="0" Grid.Row="2">Lastname</Label>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Grid.Column="0" Grid.Row="3">Age</Label>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Age}" />
+            <Label Grid.Column="0" Grid.Row="4">Fullname</Label>
+            <TextBox Grid.Column="1" Grid.Row="4" IsReadOnly="True" Text="{Binding Path=FullName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
+            <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid Name="AddressGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0">Address Id</Label>
+                    <TextBox Grid.Column="1" Grid.Row="0" IsReadOnly="True" Text="{Binding AddressId, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="1">Street</Label>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Street, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="2">Zip Code</Label>
+                    <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding ZipCode, UpdateSourceTrigger=PropertyChanged}" />
+                    <Label Grid.Column="0" Grid.Row="3">City</Label>
+                <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding City, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+            </StackPanel>
+            <ListBox Grid.Row="6" Grid.Column="2"  ItemsSource="{Binding Addresses}" SelectionChanged="SelectedAddressChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding AddressId}" />
+                            <TextBlock Text="{Binding Street}" />
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Path=ZipCode}" />
+                                <TextBlock Text=" " />
+                                <TextBlock Text="{Binding City}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Content="Create" Click="CreateAddress" />
+            <Button Grid.Column="2" Grid.Row="7" Content="Delete" />
+        </Grid>
+</Window>
