@@ -6,7 +6,7 @@ using GridWithBinding.Annotations;
 
 namespace GridWithBinding
 {
-    public class Person : INotifyPropertyChanged
+    public class Person : INotifyPropertyChanged, IDataErrorInfo
     {
         private Guid _id;
         private string _firstName;
@@ -55,6 +55,7 @@ namespace GridWithBinding
         public Person()
         {
             PersonId = Guid.NewGuid();
+            Error = null;
             Addresses = new ObservableCollection<Address>();
         }
         private static Person _instance;
@@ -67,5 +68,17 @@ namespace GridWithBinding
                 FullName = FirstName + " " + LastName;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName != nameof(Age)) return null;
+                if (Age < 0 || Age > 150)
+                    return "Age must not be less than 0 or greater than 150.";
+                return null;
+            }
+        }
+
+        public string Error { get; }
     }
 }

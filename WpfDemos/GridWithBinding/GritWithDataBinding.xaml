@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Title="Grid Layout mit Data Binding" Height="450" Width="800"
         DataContext="{x:Static local:Person.Instance}">
+    <Window.Resources>
+        <Style TargetType="FrameworkElement">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type FrameworkElement}}" />
+    </Window.Resources>
     <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -30,7 +41,7 @@
             <Label Grid.Column="0" Grid.Row="2">Lastname</Label>
             <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=LastName, UpdateSourceTrigger=PropertyChanged}" />
             <Label Grid.Column="0" Grid.Row="3">Age</Label>
-            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Age}" />
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=Age, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
             <Label Grid.Column="0" Grid.Row="4">Fullname</Label>
             <TextBox Grid.Column="1" Grid.Row="4" IsReadOnly="True" Text="{Binding Path=FullName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
             <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
