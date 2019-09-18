@@ -1,9 +1,9 @@
 ﻿namespace SimpleDelegateAndTaskTutorial.Event
 {
-    public delegate void EventHandler(Account sender, OverDrawnEventArgs e);
+    public delegate void OdEventHandler(Account sender, OverDrawnEventArgs e);
     public class Account
     {
-        public event EventHandler OverDrawn;
+        public event OdEventHandler OverDrawn;
         private double _balance;
         public Account(double initDeposit)
         {
